@@ -4,10 +4,8 @@ import (
 	"fmt"
 
 	"github.com/ahfrd/gateway-apps-grpc/config"
-	controller "github.com/ahfrd/gateway-apps-grpc/src/controller/emoney"
+	controller "github.com/ahfrd/gateway-apps-grpc/src/controller"
 	proto "github.com/ahfrd/gateway-apps-grpc/src/proto/emoney"
-	repository "github.com/ahfrd/gateway-apps-grpc/src/repository"
-	svc "github.com/ahfrd/gateway-apps-grpc/src/service/emoney"
 
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
@@ -29,16 +27,7 @@ func InitServiceClientEmoney(c *config.Config) proto.EmoneyServiceClient {
 	}
 	return proto.NewEmoneyServiceClient(cc)
 }
-func InitControllerEmoney() *ControllerEmoney {
-	var emoneyProto proto.EmoneyServiceClient
-	emoneyRepository := repository.NewEmoneyRepository(&emoneyProto)
-	emoneySvc := svc.NewEmoneyService(&emoneyRepository)
-	emoneyController := controller.NewEmoneyController(&emoneySvc)
-	controller := &ControllerEmoney{
-		Controller: emoneyController,
-	}
-	return controller
-}
+
 func RoutesEmoney(r *gin.Engine, c *config.Config, authSvc *ServiceClient) {
 
 	svc := &ServiceClientEmoney{
@@ -54,24 +43,24 @@ func RoutesEmoney(r *gin.Engine, c *config.Config, authSvc *ServiceClient) {
 }
 
 func (ServiceClientEmoney *ServiceClientEmoney) UpdateProfile(ctx *gin.Context) {
-	routing := InitControllerEmoney()
-	routing.Controller.UpdateProfile(ctx)
+	routing := InitController()
+	routing.ControllerEmoney.UpdateProfile(ctx)
 }
 
 func (ServiceClientEmoney *ServiceClientEmoney) GetWalletInfo(ctx *gin.Context) {
-	routing := InitControllerEmoney()
-	routing.Controller.GetWalletInfo(ctx)
+	routing := InitController()
+	routing.ControllerEmoney.GetWalletInfo(ctx)
 }
 
 func (ServiceClientEmoney *ServiceClientEmoney) GetWalletProfile(ctx *gin.Context) {
-	routing := InitControllerEmoney()
-	routing.Controller.GetWalletProfile(ctx)
+	routing := InitController()
+	routing.ControllerEmoney.GetWalletProfile(ctx)
 }
 func (ServiceClientEmoney *ServiceClientEmoney) UpdatePremium(ctx *gin.Context) {
-	routing := InitControllerEmoney()
-	routing.Controller.UpdatePremiumAccount(ctx)
+	routing := InitController()
+	routing.ControllerEmoney.UpdatePremiumAccount(ctx)
 }
 func (ServiceClientEmoney *ServiceClientEmoney) InsertWalletInfo(ctx *gin.Context) {
-	routing := InitControllerEmoney()
-	routing.Controller.InsertWalletInfo(ctx)
+	routing := InitController()
+	routing.ControllerEmoney.InsertWalletInfo(ctx)
 }

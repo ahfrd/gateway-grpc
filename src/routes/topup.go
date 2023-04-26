@@ -4,9 +4,8 @@ import (
 	"fmt"
 
 	"github.com/ahfrd/gateway-apps-grpc/config"
-	controller "github.com/ahfrd/gateway-apps-grpc/src/controller/topup"
+	controller "github.com/ahfrd/gateway-apps-grpc/src/controller"
 	proto "github.com/ahfrd/gateway-apps-grpc/src/proto/topup"
-	svc "github.com/ahfrd/gateway-apps-grpc/src/service/topup"
 
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
@@ -30,14 +29,14 @@ func InitServiceClientTopUp(c *config.Config) proto.TopUpServiceClient {
 	}
 	return proto.NewTopUpServiceClient(cc)
 }
-func InitControllerTopUp() *ControllerTopUp {
-	topUpSvc := svc.NewTopUpService()
-	topUpController := controller.NewTopUpController(&topUpSvc)
-	controller := &ControllerTopUp{
-		Controller: topUpController,
-	}
-	return controller
-}
+
+// func InitControllerTopUp() *ControllerTopUp {
+
+//		controller := &ControllerTopUp{
+//			Controller: topUpController,
+//		}
+//		return controller
+//	}
 func RoutesTopUp(r *gin.Engine, c *config.Config, authSvc *ServiceClient) {
 
 	svc := &ServiceClientTopUp{
@@ -50,6 +49,6 @@ func RoutesTopUp(r *gin.Engine, c *config.Config, authSvc *ServiceClient) {
 }
 
 func (ServiceClientTopUp *ServiceClientTopUp) Form(ctx *gin.Context) {
-	routing := InitControllerTopUp()
-	routing.Controller.Form(ctx, ServiceClientTopUp.Client)
+	routing := InitController()
+	routing.ControllerTopUp.Form(ctx, ServiceClientTopUp.Client)
 }

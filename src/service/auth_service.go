@@ -1,4 +1,4 @@
-package auth
+package service
 
 import (
 	"github.com/ahfrd/gateway-apps-grpc/src/model/request"

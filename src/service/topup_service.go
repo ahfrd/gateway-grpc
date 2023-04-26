@@ -1,4 +1,4 @@
-package topup
+package service
 
 import (
 	"github.com/ahfrd/gateway-apps-grpc/src/model/request"

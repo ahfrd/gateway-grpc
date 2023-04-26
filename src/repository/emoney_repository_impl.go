@@ -8,10 +8,8 @@ import (
 	"github.com/ahfrd/gateway-apps-grpc/src/model/request"
 )
 
-func NewEmoneyRepository(protoEmoney *proto.EmoneyServiceClient) EmoneyRepository {
-	return &emoneyRepositoryImpl{
-		ProtoEmoney: *protoEmoney,
-	}
+func NewEmoneyRepository() EmoneyRepository {
+	return &emoneyRepositoryImpl{}
 }
 
 type emoneyRepositoryImpl struct {

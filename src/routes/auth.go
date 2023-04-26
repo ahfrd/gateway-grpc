@@ -4,10 +4,7 @@ import (
 	"fmt"
 
 	"github.com/ahfrd/gateway-apps-grpc/config"
-	controller "github.com/ahfrd/gateway-apps-grpc/src/controller/auth"
 	proto "github.com/ahfrd/gateway-apps-grpc/src/proto/auth"
-	repository "github.com/ahfrd/gateway-apps-grpc/src/repository"
-	svc "github.com/ahfrd/gateway-apps-grpc/src/service/auth"
 
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
@@ -16,9 +13,6 @@ import (
 
 type ServiceClient struct {
 	Client proto.AuthServiceClient
-}
-type ControllerAuth struct {
-	Controller controller.AuthController
 }
 
 func InitServiceClient(c *config.Config) proto.AuthServiceClient {
@@ -42,22 +36,22 @@ func RoutesAuth(r *gin.Engine, c *config.Config) *ServiceClient {
 	return serviceClient
 }
 
-func InitControllerAuth() *ControllerAuth {
-	authRepository := repository.NewAuthRepository()
-	authSvc := svc.NewAuthService(&authRepository)
-	authController := controller.NewAuthController(&authSvc)
-	controller := &ControllerAuth{
-		Controller: authController,
-	}
-	return controller
-}
+// func InitControllerAuth() *ControllerAuth {
+// 	authRepository := repository.NewAuthRepository()
+// 	authSvc := svc.NewAuthService(&authRepository)
+// 	authController := controller.NewAuthController(&authSvc)
+// 	controller := &ControllerAuth{
+// 		Controller: authController,
+// 	}
+// 	return controller
+// }
 
 func (ServiceClient *ServiceClient) Register(ctx *gin.Context) {
-	routing := InitControllerAuth()
-	routing.Controller.Register(ctx, ServiceClient.Client)
+	routing := InitController()
+	routing.ControllerAuth.Register(ctx, ServiceClient.Client)
 }
 
 func (ServiceClient *ServiceClient) Login(ctx *gin.Context) {
-	routing := InitControllerAuth()
-	routing.Controller.Login(ctx, ServiceClient.Client)
+	routing := InitController()
+	routing.ControllerAuth.Login(ctx, ServiceClient.Client)
 }

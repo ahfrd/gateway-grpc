@@ -1,4 +1,4 @@
-package emoney
+package service
 
 import (
 	"net/http"
