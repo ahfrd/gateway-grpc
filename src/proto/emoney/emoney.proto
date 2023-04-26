@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package emoney;
+option go_package = "/src/proto/emoney"; 
+import "google/protobuf/Any.proto";
+
+service EmoneyService {
+    rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse){}
+    rpc GetWalletProfile(GetWalletProfileRequest) returns (GetWalletProfileResponse){}
+    rpc GetWalletInfo(GetWalletInfoRequest) returns (GetWalletInfoResponse){}
+    rpc InsertWalletInfo(InsertWalletInfoRequest) returns(InsertWalletInfoResponse){}
+    rpc InsertTransaction(InsertTransactionHistoryRequest) returns (InsertTransactionHistoryResponse){}
+    rpc UpdatePremiumAccount(UpdateToPremiumAccountRequest) returns (UpdateToPremiumAccountResponse){}
+}
+
+message EmptyMessage {}
+message UpdateProfileRequest {
+    string phoneNumber = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message UpdateProfileResponse{
+    int64 ressponseCode = 1;
+    string responseMessage = 2;
+    string responseData = 3;
+}
+
+message TransactionHistoryRequest{
+    string phoneNumber =1;
+}
+
+message GetWalletProfileRequest{
+    string phoneNumber =1;
+}
+
+message GetWalletProfileResponse{
+    int64 ressponseCode = 1;
+    string responseMessage = 2;
+    AdditionalWalletProfile responseData = 3;
+    message AdditionalWalletProfile {
+        string name = 1;
+        string phoneNumber = 2;
+        string email = 3;
+    }
+}
+
+message GetWalletInfoRequest{
+    string phoneNumber =1;
+
+}
+message GetWalletInfoResponse{
+    int64 ressponseCode = 1;
+    string responseMessage = 2;
+    AdditionalWalletInfo responseData = 3;
+    message AdditionalWalletInfo {
+        string expTier = 1;
+        string ballance = 2;
+        string walletPoint = 3;
+        string walletStatus = 4;
+        string securityCode = 5;
+        string walletId = 6;
+    }
+}
+message InsertWalletInfoRequest{
+    string phoneNumber = 1;
+    string securityCode = 2;
+}
+message InsertWalletInfoResponse{
+    int64 ressponseCode = 1;
+    string responseMessage = 2;
+    string responseData = 3;
+}
+
+
+message InsertTransactionHistoryRequest{
+    string phoneNumber = 1;
+    string categoryTransaction = 3;
+    string nominalTransaction = 4;
+    string securityCode = 8;
+    string feeTransaction = 10;
+}
+
+message InsertTransactionHistoryResponse{
+    int64 ressponseCode = 1;
+    string responseMessage = 2;
+    string responseData = 3;
+}
+
+message UpdateToPremiumAccountRequest{
+    string phoneNumber = 1;
+}
+
+message UpdateToPremiumAccountResponse{
+    int64 ressponseCode = 1;
+    string responseMessage = 2;
+    string responseData = 3;
+}
+
+message GeneralResponse{
+    int64 ressponseCode = 1;
+    string responseMessage = 2;
+    google.protobuf.Any value = 3;
+}
+
+
