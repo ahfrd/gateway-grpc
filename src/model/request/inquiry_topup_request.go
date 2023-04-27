@@ -10,9 +10,3 @@ type InquiryRequest struct {
 	CodeNumb        string           `json:"codeNumber"`
 	BankCode        string           `json:"bankCode"`
 }
-
-type DebitCardRequest struct {
-	CardNumb    string `json:"nomorKartu"`
-	Valid       string `json:"validUntil"`
-	SecurityNum string `json:"securityNum"`
-}
