@@ -1,7 +1,6 @@
 package service
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 
@@ -9,22 +8,23 @@ import (
 	"github.com/ahfrd/gateway-apps-grpc/src/model/entity"
 	"github.com/ahfrd/gateway-apps-grpc/src/model/request"
 	"github.com/ahfrd/gateway-apps-grpc/src/model/response"
+	"github.com/ahfrd/gateway-apps-grpc/src/repository"
 
-	proto "github.com/ahfrd/gateway-apps-grpc/src/proto/topup"
 	"github.com/gin-gonic/gin"
 )
 
-func NewTopUpService() TopUpService {
-	return &topupServiceImpl{}
+func NewTopUpService(topUpRepository *repository.TopUpRepository) TopUpService {
+	return &topupServiceImpl{
+		TopUpRepository: *topUpRepository,
+	}
 }
 
 type topupServiceImpl struct {
+	TopUpRepository repository.TopUpRepository
 }
 
-func (service *topupServiceImpl) Form(ctx *gin.Context, c proto.TopUpServiceClient, bodyReq request.FormRequest) (*response.GeneralResponse, error) {
-	res, err := c.Form(context.Background(), &proto.FormRequest{
-		PhoneNumber: bodyReq.PhoneNumber,
-	})
+func (service *topupServiceImpl) Form(ctx *gin.Context, bodyReq request.FormRequest) (*response.GeneralResponse, error) {
+	res, err := service.TopUpRepository.Form(bodyReq)
 	resData := response.GeneralResponse{}
 	if err != nil {
 		return nil, err
@@ -39,11 +39,8 @@ func (service *topupServiceImpl) Form(ctx *gin.Context, c proto.TopUpServiceClie
 	return &resData, nil
 }
 
-func (service *topupServiceImpl) Inquiry(ctx *gin.Context, c proto.TopUpServiceClient, bodyReq request.InquiryRequest) (*response.GeneralResponse, error) {
-	res, err := c.Inquiry(context.Background(), &proto.InquiryRequest{
-		PhoneNumber: bodyReq.PhoneNumb,
-	})
-	fmt.Println(",,msm")
+func (service *topupServiceImpl) Inquiry(ctx *gin.Context, bodyReq request.InquiryRequest) (*response.GeneralResponse, error) {
+	res, err := service.TopUpRepository.Inquiry(bodyReq)
 	resData := response.GeneralResponse{}
 	if err != nil {
 		return nil, err
@@ -55,10 +52,8 @@ func (service *topupServiceImpl) Inquiry(ctx *gin.Context, c proto.TopUpServiceC
 	resData.Data = dataValue
 	return &resData, nil
 }
-func (service *topupServiceImpl) Payment(ctx *gin.Context, c proto.TopUpServiceClient, bodyReq request.FormRequest) (*response.GeneralResponse, error) {
-	res, err := c.Payment(context.Background(), &proto.PaymentRequest{
-		PhoneNumber: bodyReq.PhoneNumber,
-	})
+func (service *topupServiceImpl) Payment(ctx *gin.Context, bodyReq request.PaymentRequest) (*response.GeneralResponse, error) {
+	res, err := service.TopUpRepository.Payment(bodyReq)
 	resData := response.GeneralResponse{}
 	if err != nil {
 		return nil, err
