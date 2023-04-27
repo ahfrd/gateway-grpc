@@ -16,11 +16,11 @@ func InitController() *ControllerEntity {
 	//Repository
 	authRepository := repository.NewAuthRepository()
 	emoneyRepository := repository.NewEmoneyRepository()
-
+	topUpRepository := repository.NewTopUpRepository()
 	//Service
 	authSvc := svc.NewAuthService(&authRepository)
 	emoneySvc := svc.NewEmoneyService(&emoneyRepository)
-	topUpSvc := svc.NewTopUpService()
+	topUpSvc := svc.NewTopUpService(&topUpRepository)
 	//Controller
 	authController := controller.NewAuthController(&authSvc)
 	emoneyController := controller.NewEmoneyController(&emoneySvc)
