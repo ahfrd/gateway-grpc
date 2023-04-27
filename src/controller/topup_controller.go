@@ -39,7 +39,7 @@ func (o *TopUpController) Form(ctx *gin.Context, c proto.TopUpServiceClient) {
 	logStart := utils.LogRequest(ctx, string(requestData), requestId.String())
 	fmt.Println(logStart)
 
-	response, err := o.TopUpService.Form(ctx, c, bodyReq)
+	response, err := o.TopUpService.Form(ctx, bodyReq)
 	if err != nil {
 		utils.LogError(ctx, err.Error(), requestId.String())
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -75,7 +75,7 @@ func (o *TopUpController) Inquiry(ctx *gin.Context, c proto.TopUpServiceClient) 
 	logStart := utils.LogRequest(ctx, string(requestData), requestId.String())
 	fmt.Println(logStart)
 
-	response, err := o.TopUpService.Inquiry(ctx, c, bodyReq)
+	response, err := o.TopUpService.Inquiry(ctx, bodyReq)
 	if err != nil {
 		utils.LogError(ctx, err.Error(), requestId.String())
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -111,7 +111,7 @@ func (o *TopUpController) Payment(ctx *gin.Context, c proto.TopUpServiceClient) 
 	logStart := utils.LogRequest(ctx, string(requestData), requestId.String())
 	fmt.Println(logStart)
 
-	response, err := o.TopUpService.Inquiry(ctx, c, bodyReq)
+	response, err := o.TopUpService.Inquiry(ctx, bodyReq)
 	if err != nil {
 		utils.LogError(ctx, err.Error(), requestId.String())
 		ctx.AbortWithError(http.StatusBadRequest, err)

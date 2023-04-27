@@ -17,7 +17,7 @@ message FormRequest {
 }
 
 message GeneralResponse{
-    string ressponseCode = 1;
+    int64 ressponseCode = 1;
     string responseMessage = 2;
     google.protobuf.Any responseData = 3;
 }
@@ -57,4 +57,6 @@ message PaymentRequest {
     string phoneNumber = 5;
     DebitCardRequest cardInfo = 6;
     string codeNumber = 7;
+    string walletId = 8;
+    string securityCode = 9;
 }

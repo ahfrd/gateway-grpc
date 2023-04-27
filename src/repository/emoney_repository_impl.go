@@ -16,7 +16,7 @@ type emoneyRepositoryImpl struct {
 	ProtoEmoney proto.EmoneyServiceClient
 }
 
-func (repository *emoneyRepositoryImpl) GetWalletProfile(bodyReq request.GeneralRequestBody) (*proto.GetWalletProfileResponse, error) {
+func (repository *emoneyRepositoryImpl) GetWalletProfile(bodyReq *request.GeneralRequestBody) (*proto.GetWalletProfileResponse, error) {
 	res, err := repository.ProtoEmoney.GetWalletProfile(context.Background(), &proto.GetWalletProfileRequest{
 		PhoneNumber: bodyReq.PhoneNumber,
 	})
@@ -27,7 +27,7 @@ func (repository *emoneyRepositoryImpl) GetWalletProfile(bodyReq request.General
 	return res, nil
 }
 
-func (repository *emoneyRepositoryImpl) GetWalletInfo(bodyReq request.GeneralRequestBody) (*proto.GetWalletInfoResponse, error) {
+func (repository *emoneyRepositoryImpl) GetWalletInfo(bodyReq *request.GeneralRequestBody) (*proto.GetWalletInfoResponse, error) {
 	res, err := repository.ProtoEmoney.GetWalletInfo(context.Background(), &proto.GetWalletInfoRequest{
 		PhoneNumber: bodyReq.PhoneNumber,
 	})
@@ -37,7 +37,7 @@ func (repository *emoneyRepositoryImpl) GetWalletInfo(bodyReq request.GeneralReq
 	return res, nil
 }
 
-func (repository *emoneyRepositoryImpl) UpdateProfile(bodyReq request.UpdateProfileRequest) (*proto.UpdateProfileResponse, error) {
+func (repository *emoneyRepositoryImpl) UpdateProfile(bodyReq *request.UpdateProfileRequest) (*proto.UpdateProfileResponse, error) {
 	res, err := repository.ProtoEmoney.UpdateProfile(context.Background(), &proto.UpdateProfileRequest{
 		PhoneNumber: bodyReq.PhoneNumber,
 		Name:        bodyReq.Name,
@@ -49,7 +49,7 @@ func (repository *emoneyRepositoryImpl) UpdateProfile(bodyReq request.UpdateProf
 	return res, nil
 }
 
-func (repository *emoneyRepositoryImpl) InsertWalletInfo(bodyReq request.InsertWalletInfoRequest) (*proto.InsertWalletInfoResponse, error) {
+func (repository *emoneyRepositoryImpl) InsertWalletInfo(bodyReq *request.InsertWalletInfoRequest) (*proto.InsertWalletInfoResponse, error) {
 	res, err := repository.ProtoEmoney.InsertWalletInfo(context.Background(), &proto.InsertWalletInfoRequest{
 		PhoneNumber:  bodyReq.PhoneNumber,
 		SecurityCode: bodyReq.SecurityCode,
@@ -59,7 +59,7 @@ func (repository *emoneyRepositoryImpl) InsertWalletInfo(bodyReq request.InsertW
 	}
 	return res, nil
 }
-func (repository *emoneyRepositoryImpl) UpdatePremiumAccount(bodyReq request.GeneralRequestBody) (*proto.UpdateToPremiumAccountResponse, error) {
+func (repository *emoneyRepositoryImpl) UpdatePremiumAccount(bodyReq *request.GeneralRequestBody) (*proto.UpdateToPremiumAccountResponse, error) {
 	res, err := repository.ProtoEmoney.UpdatePremiumAccount(context.Background(), &proto.UpdateToPremiumAccountRequest{
 		PhoneNumber: bodyReq.PhoneNumber,
 	})

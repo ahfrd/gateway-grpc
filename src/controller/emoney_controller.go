@@ -38,7 +38,7 @@ func (o *EmoneyController) GetWalletProfile(ctx *gin.Context) {
 	logStart := utils.LogRequest(ctx, string(requestData), requestId.String())
 	fmt.Println(logStart)
 
-	response, err := o.EmoneyService.GetWalletProfile(ctx, bodyReq)
+	response, err := o.EmoneyService.GetWalletProfile(ctx, &bodyReq)
 	if err != nil {
 		utils.LogError(ctx, err.Error(), requestId.String())
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -75,7 +75,7 @@ func (o *EmoneyController) GetWalletInfo(ctx *gin.Context) {
 	logStart := utils.LogRequest(ctx, string(requestData), requestId.String())
 	fmt.Println(logStart)
 
-	response, err := o.EmoneyService.GetWalletInfo(ctx, bodyReq)
+	response, err := o.EmoneyService.GetWalletInfo(ctx, &bodyReq)
 	if err != nil {
 		utils.LogError(ctx, err.Error(), requestId.String())
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -112,7 +112,7 @@ func (o *EmoneyController) UpdateProfile(ctx *gin.Context) {
 	logStart := utils.LogRequest(ctx, string(requestData), requestId.String())
 	fmt.Println(logStart)
 
-	response, err := o.EmoneyService.UpdateProfile(ctx, bodyReq)
+	response, err := o.EmoneyService.UpdateProfile(ctx, &bodyReq)
 	if err != nil {
 		utils.LogError(ctx, err.Error(), requestId.String())
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -148,7 +148,7 @@ func (o *EmoneyController) InsertWalletInfo(ctx *gin.Context) {
 	logStart := utils.LogRequest(ctx, string(requestData), requestId.String())
 	fmt.Println(logStart)
 
-	response, err := o.EmoneyService.InsertWalletInfo(ctx, bodyReq)
+	response, err := o.EmoneyService.InsertWalletInfo(ctx, &bodyReq)
 	if err != nil {
 		utils.LogError(ctx, err.Error(), requestId.String())
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -184,7 +184,7 @@ func (o *EmoneyController) UpdatePremiumAccount(ctx *gin.Context) {
 	logStart := utils.LogRequest(ctx, string(requestData), requestId.String())
 	fmt.Println(logStart)
 
-	response, err := o.EmoneyService.UpdatePremiumAccount(ctx, bodyReq)
+	response, err := o.EmoneyService.UpdatePremiumAccount(ctx, &bodyReq)
 	if err != nil {
 		utils.LogError(ctx, err.Error(), requestId.String())
 		ctx.AbortWithError(http.StatusBadRequest, err)

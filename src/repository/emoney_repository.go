@@ -6,9 +6,9 @@ import (
 )
 
 type EmoneyRepository interface {
-	GetWalletProfile(bodyReq request.GeneralRequestBody) (*proto.GetWalletProfileResponse, error)
-	GetWalletInfo(bodyReq request.GeneralRequestBody) (*proto.GetWalletInfoResponse, error)
-	UpdateProfile(bodyReq request.UpdateProfileRequest) (*proto.UpdateProfileResponse, error)
-	InsertWalletInfo(bodyReq request.InsertWalletInfoRequest) (*proto.InsertWalletInfoResponse, error)
-	UpdatePremiumAccount(bodyReq request.GeneralRequestBody) (*proto.UpdateToPremiumAccountResponse, error)
+	GetWalletProfile(bodyReq *request.GeneralRequestBody) (*proto.GetWalletProfileResponse, error)
+	GetWalletInfo(bodyReq *request.GeneralRequestBody) (*proto.GetWalletInfoResponse, error)
+	UpdateProfile(bodyReq *request.UpdateProfileRequest) (*proto.UpdateProfileResponse, error)
+	InsertWalletInfo(bodyReq *request.InsertWalletInfoRequest) (*proto.InsertWalletInfoResponse, error)
+	UpdatePremiumAccount(bodyReq *request.GeneralRequestBody) (*proto.UpdateToPremiumAccountResponse, error)
 }
