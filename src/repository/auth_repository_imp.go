@@ -17,7 +17,7 @@ type authRepositoryImpl struct {
 	ProtoClient proto.AuthServiceClient
 }
 
-func (repository *authRepositoryImpl) Login(bodyReq request.LoginRequestBody) (*proto.LoginResponse, error) {
+func (repository *authRepositoryImpl) Login(bodyReq *request.LoginRequestBody) (*proto.LoginResponse, error) {
 	payload := &proto.LoginRequest{
 		PhoneNumber: bodyReq.PhoneNumber,
 		Password:    bodyReq.Password,
@@ -29,7 +29,7 @@ func (repository *authRepositoryImpl) Login(bodyReq request.LoginRequestBody) (*
 	return res, nil
 }
 
-func (repository authRepositoryImpl) Register(bodyReq request.RegisterRequestBody) (*proto.RegisterResponse, error) {
+func (repository authRepositoryImpl) Register(bodyReq *request.RegisterRequestBody) (*proto.RegisterResponse, error) {
 	fmt.Println(bodyReq)
 	payload := &proto.RegisterRequest{
 		PhoneNumber: bodyReq.PhoneNumber,

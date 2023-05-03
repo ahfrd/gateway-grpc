@@ -44,7 +44,7 @@ func (o *AuthController) Login(ctx *gin.Context, c proto.AuthServiceClient) {
 	logStart := utils.LogRequest(ctx, string(requestData), requestId.String())
 	fmt.Println(logStart)
 
-	response, err := o.AuthService.Login(ctx, bodyReq)
+	response, err := o.AuthService.Login(ctx, &bodyReq)
 	if err != nil {
 		utils.LogError(ctx, err.Error(), requestId.String())
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -78,7 +78,7 @@ func (o *AuthController) Register(ctx *gin.Context, c proto.AuthServiceClient) {
 		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
-	response, err := o.AuthService.Register(ctx, c, bodyReq)
+	response, err := o.AuthService.Register(ctx, c, &bodyReq)
 	if err != nil {
 
 		utils.LogError(ctx, err.Error(), requestId.String())

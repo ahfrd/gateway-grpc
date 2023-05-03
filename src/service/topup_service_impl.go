@@ -26,7 +26,7 @@ type topupServiceImpl struct {
 	TopUpRepository  repository.TopUpRepository
 }
 
-func (service *topupServiceImpl) Form(ctx *gin.Context, bodyReq request.FormRequest) (*response.GeneralResponse, error) {
+func (service *topupServiceImpl) Form(ctx *gin.Context, bodyReq *request.FormRequest) (*response.GeneralResponse, error) {
 	res, err := service.TopUpRepository.Form(bodyReq)
 	resData := response.GeneralResponse{}
 	if err != nil {
@@ -42,7 +42,7 @@ func (service *topupServiceImpl) Form(ctx *gin.Context, bodyReq request.FormRequ
 	return &resData, nil
 }
 
-func (service *topupServiceImpl) Inquiry(ctx *gin.Context, bodyReq request.InquiryRequest) (*response.GeneralResponse, error) {
+func (service *topupServiceImpl) Inquiry(ctx *gin.Context, bodyReq *request.InquiryRequest) (*response.GeneralResponse, error) {
 	res, err := service.TopUpRepository.Inquiry(bodyReq)
 	resData := response.GeneralResponse{}
 	if err != nil {
@@ -55,7 +55,7 @@ func (service *topupServiceImpl) Inquiry(ctx *gin.Context, bodyReq request.Inqui
 	resData.Data = dataValue
 	return &resData, nil
 }
-func (service *topupServiceImpl) Payment(ctx *gin.Context, bodyReq request.PaymentRequest) (*response.GeneralResponse, error) {
+func (service *topupServiceImpl) Payment(ctx *gin.Context, bodyReq *request.PaymentRequest) (*response.GeneralResponse, error) {
 	generalRequest := &request.GeneralRequestBody{
 		PhoneNumber: bodyReq.PhoneNumb,
 	}

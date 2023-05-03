@@ -6,6 +6,6 @@ import (
 )
 
 type AuthRepository interface {
-	Login(bodyReq request.LoginRequestBody) (*proto.LoginResponse, error)
-	Register(bodyReq request.RegisterRequestBody) (*proto.RegisterResponse, error)
+	Login(bodyReq *request.LoginRequestBody) (*proto.LoginResponse, error)
+	Register(bodyReq *request.RegisterRequestBody) (*proto.RegisterResponse, error)
 }

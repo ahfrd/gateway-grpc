@@ -15,7 +15,7 @@ type topUpRepositoryImpl struct {
 	ProtoTopUp proto.TopUpServiceClient
 }
 
-func (repository *topUpRepositoryImpl) Form(bodyReq request.FormRequest) (*proto.GeneralResponse, error) {
+func (repository *topUpRepositoryImpl) Form(bodyReq *request.FormRequest) (*proto.GeneralResponse, error) {
 	payload := &proto.FormRequest{
 		PhoneNumber: bodyReq.PhoneNumber,
 	}
@@ -25,7 +25,7 @@ func (repository *topUpRepositoryImpl) Form(bodyReq request.FormRequest) (*proto
 	}
 	return res, nil
 }
-func (repository *topUpRepositoryImpl) Inquiry(bodyReq request.InquiryRequest) (*proto.GeneralResponse, error) {
+func (repository *topUpRepositoryImpl) Inquiry(bodyReq *request.InquiryRequest) (*proto.GeneralResponse, error) {
 	payload := &proto.InquiryRequest{
 		Method:       bodyReq.Method,
 		PhoneNumber:  bodyReq.PhoneNumb,
@@ -45,7 +45,7 @@ func (repository *topUpRepositoryImpl) Inquiry(bodyReq request.InquiryRequest) (
 	}
 	return res, nil
 }
-func (repository *topUpRepositoryImpl) Payment(bodyReq request.PaymentRequest) (*proto.GeneralResponse, error) {
+func (repository *topUpRepositoryImpl) Payment(bodyReq *request.PaymentRequest) (*proto.GeneralResponse, error) {
 	payload := &proto.PaymentRequest{
 		Method:       bodyReq.Method,
 		PhoneNumber:  bodyReq.PhoneNumb,

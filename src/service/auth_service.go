@@ -7,6 +7,6 @@ import (
 )
 
 type AuthService interface {
-	Login(ctx *gin.Context, bodyReq request.LoginRequestBody) (*proto.LoginResponse, error)
-	Register(ctx *gin.Context, c proto.AuthServiceClient, bodyReq request.RegisterRequestBody) (*proto.RegisterResponse, error)
+	Login(ctx *gin.Context, bodyReq *request.LoginRequestBody) (*proto.LoginResponse, error)
+	Register(ctx *gin.Context, c proto.AuthServiceClient, bodyReq *request.RegisterRequestBody) (*proto.RegisterResponse, error)
 }

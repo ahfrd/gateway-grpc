@@ -20,7 +20,7 @@ type authServiceImpl struct {
 	AuthRepositry repository.AuthRepository
 }
 
-func (service *authServiceImpl) Login(ctx *gin.Context, bodyReq request.LoginRequestBody) (*proto.LoginResponse, error) {
+func (service *authServiceImpl) Login(ctx *gin.Context, bodyReq *request.LoginRequestBody) (*proto.LoginResponse, error) {
 	res, err := service.AuthRepositry.Login(bodyReq)
 	if err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -29,7 +29,7 @@ func (service *authServiceImpl) Login(ctx *gin.Context, bodyReq request.LoginReq
 	return res, nil
 }
 
-func (service *authServiceImpl) Register(ctx *gin.Context, c proto.AuthServiceClient, bodyReq request.RegisterRequestBody) (*proto.RegisterResponse, error) {
+func (service *authServiceImpl) Register(ctx *gin.Context, c proto.AuthServiceClient, bodyReq *request.RegisterRequestBody) (*proto.RegisterResponse, error) {
 	res, err := c.Register(context.Background(), &proto.RegisterRequest{
 		PhoneNumber: bodyReq.PhoneNumber,
 		Password:    bodyReq.Password,
